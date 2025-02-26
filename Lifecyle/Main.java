@@ -3,23 +3,18 @@ package Lifecyle;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+    public class Main {
+        static SessionFactory sessionFactory;
 
-public class Main {
-    static SessionFactory sessionFactory;
-
-    static {
-        try {
-            sessionFactory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Company.class).buildSessionFactory();
-        } catch (Exception e) {
-            e.printStackTrace();
+        static {
+            sessionFactory = new Configuration().configure("hibernate.cfg.xml")
+                    .addAnnotatedClass(Company.class)
+                    .buildSessionFactory();
         }
 
-
+        public static Session getSession() {
+            return sessionFactory.getCurrentSession();
+        }
     }
 
-    public static Session getSession() {
-        return sessionFactory.getCurrentSession();
-
-    }
-}
 
